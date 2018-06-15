@@ -49,5 +49,13 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IuliiaChumachenko/ToDoList_Angular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IuliiaChumachenko/ToDoList_Angular/issues"
+  },
+  "homepage": "https://github.com/IuliiaChumachenko/ToDoList_Angular#readme"
 }

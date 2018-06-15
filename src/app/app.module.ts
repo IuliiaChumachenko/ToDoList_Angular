@@ -1,18 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FormComponent } from './form/form.component';
-import { ChildComponent } from './child/child.component';
+import { TodolistComponent } from './todolist/todolist.component';
+import { TodolistFormComponent } from './todolist-form/todolist-form.component';
+import { TodolistItemsComponent } from './todolist-items/todolist-items.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent,
-    ChildComponent
+    TodolistComponent,
+    TodolistFormComponent,
+    TodolistItemsComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
