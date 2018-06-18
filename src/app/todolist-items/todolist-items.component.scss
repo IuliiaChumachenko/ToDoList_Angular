@@ -30,7 +30,7 @@
   }
 }
 
-.list-note {
+.list-item {
   width: 600px;
   height: 40px;
   border: 1px solid black;
@@ -39,3 +39,37 @@
   display: flex;
   justify-content: space-between;
 }
+
+.btn-container {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.itemText, .itemDate {
+  align-self: center;
+}
+
+.button {
+  width: 50px;
+  height: 30px;
+  color: white;
+  font-weight: bold;
+  align-self: center;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+  background-color: green;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.deleteBtn {
+  background-color: red;
+}
+
+.editBtn {
+  background-color: green;
+}
+

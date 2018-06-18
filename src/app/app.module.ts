@@ -7,6 +7,11 @@ import { TodolistComponent } from './todolist/todolist.component';
 import { TodolistFormComponent } from './todolist-form/todolist-form.component';
 import { TodolistItemsComponent } from './todolist-items/todolist-items.component';
 
+//services
+import {LocalStorageService} from './services/local-storage.service';
+import {TodolistService} from './services/todolist-service.service';
+
+
 
 @NgModule({
   declarations: [
@@ -19,7 +24,10 @@ import { TodolistItemsComponent } from './todolist-items/todolist-items.componen
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    LocalStorageService,
+    TodolistService
+  ],
   bootstrap: [AppComponent]
 })
 

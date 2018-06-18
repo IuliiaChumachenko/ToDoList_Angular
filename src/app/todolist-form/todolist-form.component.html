@@ -3,8 +3,8 @@
     <textarea name="newItem" id="newItem" [(ngModel)]="text"></textarea>
 
     <input type="hidden" name="index">
-    <input type="button" value="Add new task" id="addBtn" class="btn" (click)='addItemToList()'>
-    <input type="button" value="Save changes" id="saveBtn" class="btn" (click)='saveItem()'>
+    <input type="button" value="Add new task" id="addBtn" class="btn" (click)='onGetTextForNewItem()'>
+    <input type="button" value="Save changes" id="saveBtn" class="btn" (click)='saveNewTextForItem()'>
 
   </form>
 </div>

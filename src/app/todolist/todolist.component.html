@@ -1,6 +1,6 @@
 <h1>ToDo List</h1>
 <!-- компонента формы -->
-<app-todolist-form></app-todolist-form>
+<app-todolist-form (getTextForNewItem)="createNewItem($event)" (updateText)="updateItem($event)" [editedItemText]="this.editedItemText"></app-todolist-form>
 
 <!-- компонента списка -->
-<app-todolist-items></app-todolist-items>
+<app-todolist-items [todos]="todos" (deleteListItem)="deleteItem($event)" (editListItem)="getIdOfEditedItem($event)" (sortListByText)="sortList($event)" (sortListByDate)="sortList($event)" (searchInList)="searchInList($event)"></app-todolist-items>
