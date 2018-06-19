@@ -3,4 +3,6 @@
 <app-todolist-form (getTextForNewItem)="createNewItem($event)" (updateText)="updateItem($event)" [editedItemText]="this.editedItemText"></app-todolist-form>
 
 <!-- компонента списка -->
-<app-todolist-items [todos]="todos" (deleteListItem)="deleteItem($event)" (editListItem)="getIdOfEditedItem($event)" (sortListByText)="sortList($event)" (sortListByDate)="sortList($event)" (searchInList)="searchInList($event)"></app-todolist-items>
+<app-todolist-items [flag]='flag' [todos]="todos" [searchTodos]="searchTodos" [startIndex]='startIndex' [lastIndex]='lastIndex' (deleteListItem)="deleteItem($event)" (editListItem)="getIdOfEditedItem($event)" (sortListByText)="sortList($event)" (sortListByDate)="sortList($event)" (searchInList)="searchInList($event)"></app-todolist-items>
+
+<app-pagination [maxItemOnPage]='maxItemOnPage' [todos]="todos" [searchTodos]="searchTodos" (selectPage)="selectPage($event)"></app-pagination>

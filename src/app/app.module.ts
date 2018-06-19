@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -10,6 +10,7 @@ import { TodolistItemsComponent } from './todolist-items/todolist-items.componen
 //services
 import {LocalStorageService} from './services/local-storage.service';
 import {TodolistService} from './services/todolist-service.service';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 
@@ -19,10 +20,12 @@ import {TodolistService} from './services/todolist-service.service';
     TodolistComponent,
     TodolistFormComponent,
     TodolistItemsComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     LocalStorageService,

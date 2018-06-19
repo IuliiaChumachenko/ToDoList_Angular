@@ -2,16 +2,15 @@
   <div id="sortMenu">
     <input type="button" value="Sort by text" id="sortTaskBtn" class="btn" (click)="onSortListByText()">
     <input type="button" value="Sort by date" id="sortDateBtn" class="btn" (click)="onSortListByDate()">
-    <input type="button" value="Show all" id="showAllBtn" class="btn">
+    <!--<input type="button" value="Show all" id="showAllBtn" class="btn" (click)="onShowAllList()">-->
   </div>
 
   <form name="searchForm" id="searchForm">
-    <input type="search" id="searchLine" name="searchLine" [(ngModel)]="searchText">
-    <input type="button" value="Search" id="searchBtn" class="btn" (click)="onSearchInList()">
+    <input type="search" id="searchLine" name="searchLine" [formControl]="searcher">
   </form>
 
   <ul id="todolist">
-    <li class="list-item" *ngFor = "let todo of todos">
+    <li class="list-item" *ngFor = "let todo of renderingTodos">
       <div class="itemText">{{todo.text}}</div>
       <div class="btn-container">
         <div class="itemDate">{{todo.date}}</div>

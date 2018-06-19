@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TodolistService } from '../services/todolist-service.service';
 import { TodoItem } from '../todoItem';
 import {LocalStorageService} from '../services/local-storage.service';
-import {isDefaultChangeDetectionStrategy} from '@angular/core/src/change_detection/constants';
+// import {isDefaultChangeDetectionStrategy} from '@angular/core/src/change_detection/constants';
 
 @Component({
   selector: 'app-todolist-service',
@@ -13,14 +12,20 @@ import {isDefaultChangeDetectionStrategy} from '@angular/core/src/change_detecti
 
 export class TodolistComponent implements OnInit {
   public todos: TodoItem[] = [];
+  public searchTodos: TodoItem[];
+  public maxItemOnPage: number = 3;
   public editedItemId: number;
+  public startIndex: number = 0;
+  public lastIndex: number = this.startIndex + this.maxItemOnPage - 1;
   public editedItemText: string;
+  flag: boolean = true;
   constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit() {
     if (this.localStorageService.fromLocalStorage()) {
       this.todos = this.localStorageService.fromLocalStorage();
     }
+    this.searchTodos = this.todos;
   }
   // public get todos(): TodoItem[] {
   //   if (!this._todos) {
@@ -56,10 +61,12 @@ export class TodolistComponent implements OnInit {
     const newItem = new TodoItem(this.countId(), text, this.countDate());
     // console.log(newItem);
     this.todos = [...this.todos, newItem];
+    this.searchTodos = this.todos;
     this.localStorageService.toLocalStorage(this.todos);
   }
   public deleteItem(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id);
+    this.searchTodos = this.todos;
     this.localStorageService.toLocalStorage(this.todos);
   }
   public getIdOfEditedItem(id: number): void {
@@ -72,6 +79,7 @@ export class TodolistComponent implements OnInit {
     const editedItem = this.todos.filter(todo => todo.id === this.editedItemId);
     editedItem[0].text = text;
     editedItem[0].date = this.countDate();
+    this.searchTodos = this.todos;
     this.localStorageService.toLocalStorage(this.todos);
     this.editedItemText = '';
     this.editedItemId = 0;
@@ -85,9 +93,36 @@ export class TodolistComponent implements OnInit {
         return 1;
       }
     });
+    this.searchTodos = this.todos;
     this.localStorageService.toLocalStorage(this.todos);
+    this.flag = !this.flag;
   }
   public searchInList(searchText: string) {
-    console.log(searchText);
+    this.searchTodos = this.todos.filter(item => item.text.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+  }
+  // public searchInList(searchText: string) {
+  //   if (!searchText) {
+  //     return;
+  //   }
+  //   const lastElem: number = searchText.length;
+  //   this.todos.forEach((item) => {
+  //     if (item.text.slice(0, lastElem) ===  searchText) {
+  //       this.searchTodos = [...this.searchTodos, item];
+  //     }
+  //   });
+  //   searchText = '';
+  //   if (this.searchTodos.length === 0) {
+  //     document.getElementById('searchLine').value = 'No matches';
+  //     setTimeout(() => {
+  //       document.getElementById('searchLine').value = '';
+  //     }, 3000);
+  //     return;
+  //   }
+  // }
+  public selectPage(pageNumber: number){
+    this.startIndex = this.maxItemOnPage * (pageNumber - 1);
+    this.lastIndex = this.startIndex + this.maxItemOnPage - 1;
+    // console.log(this.startIndex, this.lastIndex);
+    this.flag = !this.flag;
   }
 }

@@ -1,0 +1,3 @@
+<ul id="navContainer">
+  <li class='NavBtn' (click)="onSelectPage(page)" *ngFor = "let page of paginationPages" [ngClass]="{NavSelectedBtn:page === selbut}">{{page}}</li>
+</ul>
