@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { TodoItem } from '../todoItem';
-import {LocalStorageService} from '../services/local-storage.service';
+import { Component, OnInit } from '@angular/core';
+import { TodoItem } from '../../todoItem';
+import {LocalStorageService} from '../../services/local-storage/local-storage.service';
 // import {isDefaultChangeDetectionStrategy} from '@angular/core/src/change_detection/constants';
 
 @Component({
@@ -27,16 +27,6 @@ export class TodolistComponent implements OnInit {
     }
     this.searchTodos = this.todos;
   }
-  // public get todos(): TodoItem[] {
-  //   if (!this._todos) {
-  //     return this._todos = this.localStorageService.fromLocalStorage();
-  //   }
-  //   return this._todos;
-  // }
-  // public set todos(newItem: TodoItem) {
-  //   this.todos = [...this.todos, newItem];
-  // }
-
   public countId() {
     let mustChangeId = false;
     let id = 0;
@@ -100,25 +90,6 @@ export class TodolistComponent implements OnInit {
   public searchInList(searchText: string) {
     this.searchTodos = this.todos.filter(item => item.text.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
   }
-  // public searchInList(searchText: string) {
-  //   if (!searchText) {
-  //     return;
-  //   }
-  //   const lastElem: number = searchText.length;
-  //   this.todos.forEach((item) => {
-  //     if (item.text.slice(0, lastElem) ===  searchText) {
-  //       this.searchTodos = [...this.searchTodos, item];
-  //     }
-  //   });
-  //   searchText = '';
-  //   if (this.searchTodos.length === 0) {
-  //     document.getElementById('searchLine').value = 'No matches';
-  //     setTimeout(() => {
-  //       document.getElementById('searchLine').value = '';
-  //     }, 3000);
-  //     return;
-  //   }
-  // }
   public selectPage(pageNumber: number){
     this.startIndex = this.maxItemOnPage * (pageNumber - 1);
     this.lastIndex = this.startIndex + this.maxItemOnPage - 1;

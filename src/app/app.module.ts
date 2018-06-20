@@ -1,18 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgModule } from '@angular/core';
-
+/* components */
 import { AppComponent } from './app.component';
-import { TodolistComponent } from './todolist/todolist.component';
-import { TodolistFormComponent } from './todolist-form/todolist-form.component';
-import { TodolistItemsComponent } from './todolist-items/todolist-items.component';
-
-//services
-import {LocalStorageService} from './services/local-storage.service';
-import {TodolistService} from './services/todolist-service.service';
-import { PaginationComponent } from './pagination/pagination.component';
-
-
+import { TodolistComponent } from './components/todolist/todolist.component';
+import { TodolistFormComponent } from './components/todolist-form/todolist-form.component';
+import { TodolistItemsComponent } from './components/todolist-items/todolist-items.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+/* service */
+import {LocalStorageService} from './services/local-storage/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -28,8 +24,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     ReactiveFormsModule
   ],
   providers: [
-    LocalStorageService,
-    TodolistService
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })

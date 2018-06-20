@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import { TodoItem } from '../todoItem';
+import { TodoItem } from '../../todoItem';
 
 @Component({
   selector: 'app-todolist-items',
