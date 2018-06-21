@@ -1,8 +1,18 @@
 <h1>ToDo List</h1>
+
 <!-- компонента формы -->
 <app-todolist-form (getTextForNewItem)="createNewItem($event)" (updateText)="updateItem($event)" [editedItemText]="this.editedItemText"></app-todolist-form>
 
-<!-- компонента списка -->
-<app-todolist-items [flag]='flag' [todos]="todos" [searchTodos]="searchTodos" [startIndex]='startIndex' [lastIndex]='lastIndex' (deleteListItem)="deleteItem($event)" (editListItem)="getIdOfEditedItem($event)" (sortListByText)="sortList($event)" (sortListByDate)="sortList($event)" (searchInList)="searchInList($event)"></app-todolist-items>
+<!-- компонента сортировки -->
+<app-sortlist (sortListByText)="sortList($event)" (sortListByDate)="sortList($event)"></app-sortlist>
 
+<!-- компонента поиска -->
+<app-search-in-list [todos]="todos" [searchTodos]="searchTodos" (searchInList)="searchInList($event)"></app-search-in-list>
+
+<!-- компонента списка -->
+<ul id="todolist">
+  <app-todolist-items [flag]='flag' [todos]="todos" [searchTodos]="searchTodos" [startIndex]='startIndex' [lastIndex]='lastIndex' (deleteListItem)="deleteItem($event)" (editListItem)="getIdOfEditedItem($event)"></app-todolist-items>
+</ul>
+
+<!-- компонента пагинации -->
 <app-pagination [maxItemOnPage]='maxItemOnPage' [todos]="todos" [searchTodos]="searchTodos" (selectPage)="selectPage($event)"></app-pagination>

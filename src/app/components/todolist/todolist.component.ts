@@ -63,7 +63,6 @@ export class TodolistComponent implements OnInit {
     this.editedItemId = id;
     const editedItem = this.todos.filter(todo => todo.id === id);
     this.editedItemText = editedItem[0].text;
-    // console.log(this.editedItemText);
   }
   public updateItem(text: string): void {
     const editedItem = this.todos.filter(todo => todo.id === this.editedItemId);

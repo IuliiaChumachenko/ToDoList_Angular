@@ -1,24 +1,8 @@
-<div id="list">
-  <div id="sortMenu">
-    <input type="button" value="Sort by text" id="sortTaskBtn" class="btn" (click)="onSortListByText()">
-    <input type="button" value="Sort by date" id="sortDateBtn" class="btn" (click)="onSortListByDate()">
-    <!--<input type="button" value="Show all" id="showAllBtn" class="btn" (click)="onShowAllList()">-->
+<li class="list-item" *ngFor = "let todo of renderingTodos">
+  <div class="itemText">{{todo.text}}</div>
+  <div class="btn-container">
+    <div class="itemDate">{{todo.date}}</div>
+    <div class="button editBtn" (click)="onEditListItem(todo.id)">Edit</div>
+    <div class="button deleteBtn" (click)="onDeleteListItem(todo.id)">Delete</div>
   </div>
-
-  <form name="searchForm" id="searchForm">
-    <input type="search" id="searchLine" name="searchLine" [formControl]="searcher">
-  </form>
-
-  <ul id="todolist">
-    <li class="list-item" *ngFor = "let todo of renderingTodos">
-      <div class="itemText">{{todo.text}}</div>
-      <div class="btn-container">
-        <div class="itemDate">{{todo.date}}</div>
-        <div class="button editBtn" (click)="onEditListItem(todo.id)">Edit</div>
-        <div class="button deleteBtn" (click)="onDeleteListItem(todo.id)">Delete</div>
-      </div>
-    </li>
-  </ul>
-
-  <!--<div id="navigatorContainer"><div id="navPrev">&lt;</div><div id="btnNavigator"></div><div id="navNext">&gt;</div></div>-->
-</div>
+</li>
