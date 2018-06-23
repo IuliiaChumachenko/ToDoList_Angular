@@ -12,6 +12,8 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output() selectPage = new EventEmitter();
   public selbut;
   public paginationPages = [];
+
+  // public
   constructor() { }
   ngOnInit() {
   }
@@ -23,7 +25,15 @@ export class PaginationComponent implements OnInit, OnChanges {
     // console.log(this.paginationPages);
   }
   onSelectPage(page: Number) {
-    this.selectPage.emit(page);
     this.selbut = page;
+    let startIndex: number = this.maxItemOnPage * (this.selbut - 1);
+    let lastIndex: number = startIndex + this.maxItemOnPage - 1;
+    interface PageIndexesInterface {start: number; last: number};
+    class PageIndexes implements PageIndexesInterface {
+      constructor(public start: number, public last: number) {}
+    };
+    let pageIndexes = new PageIndexes (startIndex, lastIndex);
+    this.selectPage.emit(pageIndexes);
+    // console.log(pageIndexes);
   }
 }

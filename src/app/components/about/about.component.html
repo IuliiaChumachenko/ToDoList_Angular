@@ -1,0 +1,13 @@
+<ul>
+  <li *ngFor = 'let item of dataArray'>
+    <div>{{item.name}}</div>
+    <div>{{item.gender}}</div>
+  </li>
+</ul>
+<!--<mat-slide-toggle>-->
+<br>
+<div id="checkboxConteainer">
+  <mat-checkbox #showDiv color="warn" [checked]="checked">Ura zarabotalo!</mat-checkbox>
+  <div *ngIf="showDiv.checked">I love Jon Snow</div>
+</div>
+

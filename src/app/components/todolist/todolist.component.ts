@@ -1,31 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoItem } from '../../todoItem';
 import {LocalStorageService} from '../../services/local-storage/local-storage.service';
-// import {isDefaultChangeDetectionStrategy} from '@angular/core/src/change_detection/constants';
+import {countDate} from '../../helpers/countDate';
 
 @Component({
   selector: 'app-todolist-service',
   templateUrl: './todolist.component.html',
-  styleUrls: ['./todolist.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.onPush
+  styleUrls: ['./todolist.component.scss']
 })
 
 export class TodolistComponent implements OnInit {
   public todos: TodoItem[] = [];
   public searchTodos: TodoItem[];
+  public renderingTodos: TodoItem[] = [];
   public maxItemOnPage: number = 3;
-  public editedItemId: number;
   public startIndex: number = 0;
   public lastIndex: number = this.startIndex + this.maxItemOnPage - 1;
+  public editedItemId: number;
   public editedItemText: string;
-  flag: boolean = true;
-  constructor(private localStorageService: LocalStorageService) {}
+   constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit() {
     if (this.localStorageService.fromLocalStorage()) {
       this.todos = this.localStorageService.fromLocalStorage();
     }
     this.searchTodos = this.todos;
+    this.renderingTodos = [];
+    let i = 0;
+    while (i < this.maxItemOnPage && this.searchTodos[i]) {
+      this.renderingTodos = [...this.renderingTodos, this.searchTodos[i]];
+      i++;
+    }
   }
   public countId() {
     let mustChangeId = false;
@@ -42,16 +47,16 @@ export class TodolistComponent implements OnInit {
     } while (mustChangeId)
     return id;
   }
-  public countDate() {
-    let resultDate: string = '';
-    const date: any = new Date();
-    return resultDate = date.toUTCString().replace('GMT', '').trim();
-  }
   public createNewItem(text: string): void {
-    const newItem = new TodoItem(this.countId(), text, this.countDate());
-    // console.log(newItem);
+    const newItem = new TodoItem(this.countId(), text, countDate());
     this.todos = [...this.todos, newItem];
     this.searchTodos = this.todos;
+    this.renderingTodos = [];
+    let i = 0;
+    while (i < this.maxItemOnPage && this.searchTodos[i]) {
+      this.renderingTodos = [...this.renderingTodos, this.searchTodos[i]];
+      i++;
+    }
     this.localStorageService.toLocalStorage(this.todos);
   }
   public deleteItem(id: number): void {
@@ -67,7 +72,7 @@ export class TodolistComponent implements OnInit {
   public updateItem(text: string): void {
     const editedItem = this.todos.filter(todo => todo.id === this.editedItemId);
     editedItem[0].text = text;
-    editedItem[0].date = this.countDate();
+    editedItem[0].date = countDate();
     this.searchTodos = this.todos;
     this.localStorageService.toLocalStorage(this.todos);
     this.editedItemText = '';
@@ -83,16 +88,35 @@ export class TodolistComponent implements OnInit {
       }
     });
     this.searchTodos = this.todos;
+    this.renderingTodos = [];
+    let i = 0;
+    while (i < this.maxItemOnPage && this.searchTodos[i]) {
+      this.renderingTodos = [...this.renderingTodos, this.searchTodos[i]];
+      i++;
+    }
     this.localStorageService.toLocalStorage(this.todos);
-    this.flag = !this.flag;
   }
   public searchInList(searchText: string) {
+    this.searchTodos = [];
     this.searchTodos = this.todos.filter(item => item.text.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+
+    let i = 0;
+    this.renderingTodos = [];
+    while (i < this.maxItemOnPage && this.searchTodos[i]) {
+      this.renderingTodos = [...this.renderingTodos, this.searchTodos[i]];
+      i++;
+    }
+
   }
-  public selectPage(pageNumber: number){
-    this.startIndex = this.maxItemOnPage * (pageNumber - 1);
-    this.lastIndex = this.startIndex + this.maxItemOnPage - 1;
-    // console.log(this.startIndex, this.lastIndex);
-    this.flag = !this.flag;
+  public selectPage(pageIndexes){
+    this.startIndex = pageIndexes.start;
+    this.lastIndex = pageIndexes.last;
+
+    this.renderingTodos = [];
+    let i = this.startIndex;
+    while (i <= this.lastIndex && this.searchTodos[i]) {
+      this.renderingTodos = [...this.renderingTodos, this.searchTodos[i]];
+      i++;
+    }
   }
 }

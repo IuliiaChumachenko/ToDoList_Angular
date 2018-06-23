@@ -1,5 +1,36 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+$backghround-color: LightGray;
+
+@mixin hover-color($color) {
+  &:hover{
+    color: $color;
+  }
+}
+
+:host {
+
+  h1 {
+    font-family: Roboto, sans-serif;
+    text-align: center;
+    @include hover-color(red);
+  }
+}
+
+#roatingBtns {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  &:first-child {
+    margin-right: 10px;
+  }
+
+  margin-bottom: 20px;
+  input{
+    width: 150px;
+    padding: 10px;
+    background-color: yellowgreen;
+    color: white;
+    font-weight: bold;
+  }
 }

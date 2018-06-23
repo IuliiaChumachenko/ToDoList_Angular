@@ -1,5 +1,3 @@
-<h1>ToDo List</h1>
-
 <!-- компонента формы -->
 <app-todolist-form (getTextForNewItem)="createNewItem($event)" (updateText)="updateItem($event)" [editedItemText]="this.editedItemText"></app-todolist-form>
 
@@ -11,8 +9,20 @@
 
 <!-- компонента списка -->
 <ul id="todolist">
-  <app-todolist-items [flag]='flag' [todos]="todos" [searchTodos]="searchTodos" [startIndex]='startIndex' [lastIndex]='lastIndex' (deleteListItem)="deleteItem($event)" (editListItem)="getIdOfEditedItem($event)"></app-todolist-items>
+  <app-todolist-item
+    *ngFor = "let todo of renderingTodos"
+    [flag]='flag'
+    [todo]="todo"
+    (deleteListItem)="deleteItem($event)"
+    (editListItem)="getIdOfEditedItem($event)">
+
+  </app-todolist-item>
+
+
 </ul>
 
 <!-- компонента пагинации -->
 <app-pagination [maxItemOnPage]='maxItemOnPage' [todos]="todos" [searchTodos]="searchTodos" (selectPage)="selectPage($event)"></app-pagination>
+
+<!--Компонета маршрутизации-->
+<!--<a routerLink="/about"><input type="button" value="Roating component"></a>-->
